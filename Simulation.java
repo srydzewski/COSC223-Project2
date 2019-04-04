@@ -1,11 +1,12 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 public class Simulation {
   private double lamda;
   private double varX;
   private int numJobs;
   private int numThrowOut;
   private double sumArrivalsSeen;
-  private ArrayList<Job> queue = new ArrayList<Job>();
+  private Queue<Job> queue = new LinkedList<Job>();
   private double arrivalTime;
   private double departureTime;
   private double time;
@@ -17,7 +18,7 @@ public class Simulation {
     numJobs = N;
     numThrowOut = throwOut;
     sumArrivalsSeen = 0;
-    arrivalTime = generateExp(lamda);
+    arrivalTime = Distribution.generateExp(lamda);
     departureTime = -1.0;
     time = 0;
     currentJob = null;
@@ -34,7 +35,7 @@ public class Simulation {
           sumArrivalsSeen += queue.size();
         }
         //generate new job
-        double new_size = generateHyperExp(varX);
+        double new_size = Distribution.generateHyperExp(varX);
         Job new_job = new Job(new_size);
         //if server is idle
         if (currentJob == null){
@@ -45,7 +46,7 @@ public class Simulation {
         else{
           queue.add(new_job);
         }
-        arrivalTime = time + generateExp(lamda);
+        arrivalTime = time + Distribution.generateExp(lamda);
       }
       //if next event is a departure
       else {
@@ -58,9 +59,9 @@ public class Simulation {
         }
         //otherwise put first job in queue on server
         else {
-          Job upNext = queue.remove(0);
+          Job upNext = queue.remove();
           currentJob = upNext;
-          depatureTime = time + currentJob.getJobSize();
+          departureTime = time + currentJob.getJobSize();
         }
         jobsDone++;
       }

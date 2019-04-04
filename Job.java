@@ -1,11 +1,10 @@
 public class Job{
   private double jobSize;
   public Job(double jobSize){
-    this.arrivalTime = arrivalTime;
-    this.jobSize = jobSize
+    this.jobSize = jobSize;
   }
 
-  public int getJobSize(){
+  public double getJobSize(){
     return jobSize;
   }
 }
