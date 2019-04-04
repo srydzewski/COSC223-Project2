@@ -57,7 +57,7 @@ public class Simulation {
       }
       else {
         time = departureTime;
-        
+
       }
 
     }
