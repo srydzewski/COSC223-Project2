@@ -5,23 +5,23 @@ public class Simulation {
   private double varX;
   private int numJobs;
   private int numThrowOut;
-  private double sumArrivalsSeen;
   private Queue<Job> queue = new LinkedList<Job>();
   private double arrivalTime;
   private double departureTime;
   private double time;
   private Job currentJob;
+  private double sumOfTimes;
 
   public Simulation(double lamda, int var, int N, int throwOut){
     this.lamda = lamda;
     varX = var;
     numJobs = N;
     numThrowOut = throwOut;
-    sumArrivalsSeen = 0;
     arrivalTime = Distribution.generateExp(lamda);
     departureTime = -1.0;
     time = 0;
     currentJob = null;
+    sumOfTimes = 0;
   }
 
   public void run(){
@@ -30,13 +30,9 @@ public class Simulation {
       //if next event is an arrival
       if (arrivalTime < departureTime || departureTime < 0){
         time = arrivalTime;
-        //add how many jobs are before the arrival
-        if (jobsDone >= numThrowOut){
-          sumArrivalsSeen += queue.size();
-        }
         //generate new job
         double new_size = Distribution.generateHyperExp(varX);
-        Job new_job = new Job(new_size);
+        Job new_job = new Job(new_size,time);
         //if server is idle
         if (currentJob == null){
           currentJob = new_job;
@@ -59,6 +55,9 @@ public class Simulation {
         }
         //otherwise put first job in queue on server
         else {
+          if (jobsDone >= numThrowOut){
+            sumOfTimes += (time - currentJob.getArrivalTime());
+          }
           Job upNext = queue.remove();
           currentJob = upNext;
           departureTime = time + currentJob.getJobSize();
@@ -71,8 +70,8 @@ public class Simulation {
   public double getAvgResponseTime(){
     run();
     //finding E[T] by Little's Law
-    double avgJobsBefore = sumArrivalsSeen/(numJobs - numThrowOut);
-    return avgJobsBefore/lamda;
+    double avgResponseTime = sumOfTimes/(numJobs - numThrowOut);
+    return avgResponseTime;
   }
 
 }
