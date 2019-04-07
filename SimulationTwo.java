@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 public class SimulationTwo {
 private double lamda;
 private double varX;
@@ -29,7 +31,7 @@ public void run(){
     if (arrivalTime < departureTime || departureTime < 0){
       time = arrivalTime;
       //generate new job
-      double new_size = Distribution.generateExp(lamba);
+      double new_size = Distribution.generateExp(lamda);
       Job new_job = new Job(new_size,time);
       //if server is idle
       if (currentJob == null){
@@ -71,6 +73,5 @@ public double getAvgResponseTime(){
   return avgResponseTime;
 }
 
-}
 
 }
