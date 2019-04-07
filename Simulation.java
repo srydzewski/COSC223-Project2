@@ -69,7 +69,6 @@ public class Simulation {
 
   public double getAvgResponseTime(){
     run();
-    //finding E[T] by Little's Law
     double avgResponseTime = sumOfTimes/(numJobs - numThrowOut);
     return avgResponseTime;
   }
