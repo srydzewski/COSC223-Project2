@@ -3,7 +3,7 @@ import java.io.*;
 public class Tester{
 
     private static boolean debug = true;
-    private static int repeats = 1;
+    private static int repeats = 100;
 
     public static void main(String[] args) throws IOException{
 
@@ -45,6 +45,12 @@ public class Tester{
                 results[counter][0] = v;
                 results[counter][1] = lam;
                 results[counter][2] = rt;
+
+                if (debug){
+                    //System.out.println("variance " + v + ", lambda " + lam + ", response time " + rt);
+                }
+
+                counter++;
 
             }//lambda
         }//variance
