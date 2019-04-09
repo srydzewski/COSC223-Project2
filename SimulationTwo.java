@@ -12,7 +12,7 @@ private double time;
 private Job currentJob;
 private double sumOfTimes;
 
-public SimulationTwo(double lamda, int var, int N, int throwOut){
+public SimulationTwo(double lamda, double var, int N, int throwOut){
   this.lamda = lamda;
   varX = var;
   numJobs = N;
