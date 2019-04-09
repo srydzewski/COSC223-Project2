@@ -3,7 +3,7 @@ import java.io.*;
 public class Tester{
 
     private static boolean debug = true;
-    private static int repeats = 1;
+    private static int repeats = 100;
 
     public static void main(String[] args) throws IOException{
 
@@ -33,7 +33,7 @@ public class Tester{
                         System.out.println("\t\trepeat " + repeat);
                     }
 
-                    Simulation system = new Simulation(lambdas[j], (int) variances[i], 1000000, 10000);
+                    Simulation system = new Simulation(lambdas[j], variances[i], 1000000, 10000);
                     tempRTs[repeat] = system.getAvgResponseTime();
 
                 }//repeats
