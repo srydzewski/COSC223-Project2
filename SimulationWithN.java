@@ -69,7 +69,7 @@ public class SimulationWithN{
 
   public double getAvgResponseTime(){
     run();
-    double avgResponseTime = sumOfJobs/(numJobs - numThrowOut);
-    return avgResponseTime;
+    double avgJobs = sumOfJobs/(numJobs - numThrowOut);
+    return avgJobs/lamda;
   }
 }
