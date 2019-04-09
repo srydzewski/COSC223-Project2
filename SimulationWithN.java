@@ -1,6 +1,6 @@
 import java.util.LinkedList;
 import java.util.Queue;
-public class Simulation {
+public class SimulationWithN{
   private double lamda;
   private double varX;
   private int numJobs;
@@ -10,9 +10,9 @@ public class Simulation {
   private double departureTime;
   private double time;
   private Job currentJob;
-  private double sumOfTimes;
+  private double sumOfJobs;
 
-  public Simulation(double lamda, double var, int N, int throwOut){
+  public SimulationWithN(double lamda, double var, int N, int throwOut){
     this.lamda = lamda;
     varX = var;
     numJobs = N;
@@ -21,7 +21,7 @@ public class Simulation {
     departureTime = -1.0;
     time = 0;
     currentJob = null;
-    sumOfTimes = 0;
+    sumOfJobs = 0;
   }
 
   public void run(){
@@ -30,6 +30,9 @@ public class Simulation {
       //if next event is an arrival
       if (arrivalTime < departureTime || departureTime < 0){
         time = arrivalTime;
+        if (jobsDone >= numThrowOut){
+          sumOfJobs += queue.size();
+        }
         //generate new job
         double new_size = Distribution.generateHyperExp(varX);
         Job new_job = new Job(new_size,time);
@@ -55,9 +58,6 @@ public class Simulation {
         }
         //otherwise put first job in queue on server
         else {
-          if (jobsDone >= numThrowOut){
-            sumOfTimes += (time - currentJob.getArrivalTime());
-          }
           Job upNext = queue.remove();
           currentJob = upNext;
           departureTime = time + currentJob.getJobSize();
@@ -69,8 +69,7 @@ public class Simulation {
 
   public double getAvgResponseTime(){
     run();
-    double avgResponseTime = sumOfTimes/(numJobs - numThrowOut);
+    double avgResponseTime = sumOfJobs/(numJobs - numThrowOut);
     return avgResponseTime;
   }
-
 }
