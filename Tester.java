@@ -46,6 +46,12 @@ public class Tester{
                 results[counter][1] = lam;
                 results[counter][2] = rt;
 
+                if (debug){
+                    //System.out.println("variance " + v + ", lambda " + lam + ", response time " + rt);
+                }
+
+                counter++;
+
             }//lambda
         }//variance
 
