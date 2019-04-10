@@ -3,12 +3,12 @@ import java.io.*;
 public class Tester{
 
     private static boolean debug = true;
-    private static int repeats = 100;
+    private static int repeats = 1000;
 
     public static void main(String[] args) throws IOException{
 
         double[] variances = {1, 10, 20, 50};
-        double[] lambdas = {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
+        double[] lambdas = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
 
         double[][] results = new double[variances.length*lambdas.length][3];
         int counter = 0;
@@ -33,7 +33,7 @@ public class Tester{
                         System.out.println("\t\trepeat " + repeat);
                     }
 
-                    Simulation system = new Simulation(lambdas[j], variances[i], 1000000, 10000);
+                    SimulationTwo system = new SimulationTwo(lambdas[j], variances[i], 1000000, 10000);
                     tempRTs[repeat] = system.getAvgResponseTime();
 
                 }//repeats
@@ -56,7 +56,7 @@ public class Tester{
         }//variance
 
         //to csv
-        FileWriter writer = new FileWriter("results.csv");
+        FileWriter writer = new FileWriter("resultsTwo.csv");
         for (int k = 0; k<results.length; k++){
 
             for (int l = 0; l<results[0].length; l++){

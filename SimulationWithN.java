@@ -18,6 +18,7 @@ public class SimulationWithN{
     numJobs = N;
     numThrowOut = throwOut;
     arrivalTime = Distribution.generateExp(lamda);
+    System.out.println(arrivalTime);
     departureTime = -1.0;
     time = 0;
     currentJob = null;
@@ -30,7 +31,7 @@ public class SimulationWithN{
       //if next event is an arrival
       if (arrivalTime < departureTime || departureTime < 0){
         time = arrivalTime;
-        if (jobsDone >= numThrowOut){
+        if (jobsDone >= numThrowOut){ //to discount earlier jobs
           sumOfJobs += queue.size();
         }
         //generate new job
@@ -69,7 +70,7 @@ public class SimulationWithN{
 
   public double getAvgResponseTime(){
     run();
-    double avgResponseTime = sumOfJobs/(numJobs - numThrowOut);
-    return avgResponseTime;
+    double avgJobs = sumOfJobs/(numJobs - numThrowOut);
+    return avgJobs/lamda;
   }
 }
