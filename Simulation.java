@@ -47,6 +47,9 @@ public class Simulation {
       //if next event is a departure
       else {
         time = departureTime;
+        if (jobsDone >= numThrowOut){
+          sumOfTimes += (time - currentJob.getArrivalTime());
+        }
         //if nothing in the queue
         if (queue.size() == 0){
           currentJob = null;
@@ -55,9 +58,6 @@ public class Simulation {
         }
         //otherwise put first job in queue on server
         else {
-          if (jobsDone >= numThrowOut){
-            sumOfTimes += (time - currentJob.getArrivalTime());
-          }
           Job upNext = queue.remove();
           currentJob = upNext;
           departureTime = time + currentJob.getJobSize();
