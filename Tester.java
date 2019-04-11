@@ -33,7 +33,7 @@ public class Tester{
                         System.out.println("\t\trepeat " + repeat);
                     }
 
-                    SimulationTwo system = new SimulationTwo(lambdas[j], variances[i], 1000000, 10000);
+                    Simulation system = new Simulation(lambdas[j], variances[i], 1000000, 10000);
                     tempRTs[repeat] = system.getAvgResponseTime();
 
                 }//repeats
@@ -56,7 +56,7 @@ public class Tester{
         }//variance
 
         //to csv
-        FileWriter writer = new FileWriter("resultsTwo.csv");
+        FileWriter writer = new FileWriter("results.csv");
         for (int k = 0; k<results.length; k++){
 
             for (int l = 0; l<results[0].length; l++){
