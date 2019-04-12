@@ -66,7 +66,7 @@ public class Simulation {
       }
     }
   }
-
+//method to return the mean response time
   public double getAvgResponseTime(){
     run();
     double avgResponseTime = sumOfTimes/(numJobs - numThrowOut);

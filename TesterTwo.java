@@ -6,7 +6,7 @@ public class TesterTwo{
   public static void main(String[] args) throws IOException{
 
       double[] variances = {1, 10, 20, 50};
-      double[] lambdas = {1,1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0};
+      double[] lambdas = {1.2, 1.4, 1.6, 1.8, 2.0, 2.2, 2.4, 2.6, 2.8, 3.0};
 
       double[][] results = new double[variances.length*lambdas.length][3];
       int counter = 0;
