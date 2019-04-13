@@ -18,7 +18,6 @@ public class SimulationWithN{
     numJobs = N;
     numThrowOut = throwOut;
     arrivalTime = Distribution.generateExp(lamda);
-    System.out.println(arrivalTime);
     departureTime = -1.0;
     time = 0;
     currentJob = null;
